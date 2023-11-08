@@ -11,7 +11,7 @@ public class ConfProperties {
 
     static {
         try {
-            fileInputStream = new FileInputStream("src/main/resources/environment.properties");
+            fileInputStream = new FileInputStream("src/main/resources/properties/environment.properties");
             props = new Properties();
             props.load(fileInputStream);
         } catch (IOException e) {
