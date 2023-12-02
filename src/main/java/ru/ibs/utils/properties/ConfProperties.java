@@ -1,4 +1,4 @@
-package ru.ibs.common;
+package ru.ibs.utils.properties;
 
 import java.io.FileInputStream;
 import java.io.IOException;

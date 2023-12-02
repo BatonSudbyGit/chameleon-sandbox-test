@@ -1,4 +1,7 @@
-package ru.ibs.common;
+package ru.ibs.utils.cmd;
+
+import org.junit.jupiter.api.condition.OS;
+import ru.ibs.utils.enums.DataWarehousing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,21 +11,17 @@ import java.util.List;
 
 public class CmdCommandRunner {
 
-    private static String OS = null;
-
     /**
      * Метод для получения названия операционной системы
+     *
      * @return возвращает название операционной системы
      */
     public static String getOsName() {
-        if (OS == null) {
-            OS = System.getProperty("os.name");
-        }
-        return OS;
+        return OS.current().toString();
     }
 
     public static boolean isWindows() {
-        return getOsName().contains("Windows");
+        return getOsName().contains("WINDOWS");
     }
 
     /**
@@ -39,6 +38,7 @@ public class CmdCommandRunner {
         }
         try {
             Process process = builder.start();
+            DataWarehousing.INSTANCE.getProcessesList().add(process);
             String charset = "Windows-1251";
             BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream(), charset));
             String line;
@@ -46,6 +46,7 @@ public class CmdCommandRunner {
                 response.add(line);
                 System.out.println(line);
             }
+            stdout.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
