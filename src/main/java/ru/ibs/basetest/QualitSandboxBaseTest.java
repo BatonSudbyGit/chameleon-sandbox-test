@@ -1,13 +1,13 @@
 package ru.ibs.basetest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.ibs.utils.QualitSandboxInitialization;
 
 public class QualitSandboxBaseTest {
-    private static final Logger LOG = LoggerFactory.getLogger(QualitSandboxBaseTest.class);
+    private static final Logger LOG = LogManager.getLogger(QualitSandboxBaseTest.class);
 
     @BeforeAll
     public static void init() {

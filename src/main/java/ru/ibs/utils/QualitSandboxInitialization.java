@@ -1,7 +1,7 @@
 package ru.ibs.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.ibs.utils.cmd.CmdCommandRunner;
 import ru.ibs.utils.enums.DataWarehousing;
 import ru.ibs.utils.properties.ConfProperties;
@@ -14,7 +14,7 @@ import static ru.ibs.utils.cmd.CmdCommandRunner.isWindows;
  * QS - qualit-sandbox
  */
 public class QualitSandboxInitialization {
-    private static final Logger LOG = LoggerFactory.getLogger(QualitSandboxInitialization.class);
+    private static final Logger LOG = LogManager.getLogger(QualitSandboxInitialization.class);
 
     private static Thread thread;
 
