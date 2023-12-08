@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>${encoding.type}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding.type}</project.reporting.outputEncoding>
         <file.encoding>${encoding.type}</file.encoding>
+        <project.build.directory>target</project.build.directory>
 
         <!-- Java version -->
         <java.version>11</java.version>

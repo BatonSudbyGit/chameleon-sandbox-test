@@ -1,9 +1,8 @@
 package ru.ibs.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ru.ibs.utils.cmd.CmdCommandRunner;
 import ru.ibs.utils.enums.DataWarehousing;
+import ru.ibs.utils.logger.Log;
 import ru.ibs.utils.properties.ConfProperties;
 
 import java.io.File;
@@ -13,8 +12,7 @@ import static ru.ibs.utils.cmd.CmdCommandRunner.isWindows;
 /**
  * QS - qualit-sandbox
  */
-public class QualitSandboxInitialization {
-    private static final Logger LOG = LogManager.getLogger(QualitSandboxInitialization.class);
+public class QSInitialization {
 
     private static Thread thread;
 
@@ -26,7 +24,7 @@ public class QualitSandboxInitialization {
         String command = "cd " + System.getProperty("user.dir") + File.separator + qsPath + " ; java -jar qualit-sandbox.jar";
         thread = new Thread(() -> {
             CmdCommandRunner.runCommand(command);
-            LOG.info("Запустили qualit.sandbox в отдельном потоке");
+            Log.info("Запустили qualit.sandbox в отдельном потоке");
         });
         thread.start();
     }
@@ -55,7 +53,7 @@ public class QualitSandboxInitialization {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        LOG.info("Остановили поток, в котором запущен qualit-sandbox.jar");
+        Log.info("Остановили поток, в котором запущен qualit-sandbox.jar");
     }
 
     /**
@@ -66,6 +64,6 @@ public class QualitSandboxInitialization {
         for (Process process: DataWarehousing.INSTANCE.getProcessesList()) {
             process.destroy();
         }
-        LOG.info("Завершили все процессы");
+        Log.info("Завершили все процессы");
     }
 }
