@@ -14,7 +14,7 @@ public class JsonValidator {
     public static void validateObject(Response response) {
         try {
             JSONObject jsonSchema = new JSONObject(new JSONTokener(new FileInputStream("src/main/resources/validation_models/food.json")));
-            JSONObject jsonSubject = new JSONObject(new JSONTokener(response.asString()));
+            JSONObject jsonSubject = new JSONObject(new JSONTokener(response.asString().substring(1, response.asString().length() - 1)));
             Schema schema = SchemaLoader.load(jsonSchema);
             schema.validate(jsonSubject);
         } catch (FileNotFoundException e) {

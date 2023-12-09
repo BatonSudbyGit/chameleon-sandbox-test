@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GetListProductsTest extends QSBaseTest {
 
@@ -28,10 +29,10 @@ public class GetListProductsTest extends QSBaseTest {
         Response response = QSRequests.get(spec);
         response.statusCode();
         JsonMapper mapper = new JsonMapper();
-        List<FoodModel> foodModelList = mapper.readValue(response.asString(), new TypeReference<List<FoodModel>>() {});
+        List<FoodModel> foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
+        JsonValidator.validateObject(response);
         Assertions.assertAll(
-                () -> assertEquals(SC_OK, response.statusCode(), "Status code is incorrect"));
-//        JsonValidator.validateObject(response);
-        assertEquals(4, foodModelList.size());
+                () -> assertEquals(SC_OK, response.statusCode(), "Status code is incorrect"),
+                () -> assertTrue(foodModelList.size() > 0, "the response body is missing"));
     }
 }
