@@ -28,8 +28,7 @@ public class FoodNameGenerator {
     }
 
     public static String getName(String[] arrayNames) {
-        String name = arrayNames[new Random().nextInt(arrayNames.length) + 1];
-        System.out.println(name);
+        String name = arrayNames[new Random().nextInt(arrayNames.length)];
         return name;
     }
 }

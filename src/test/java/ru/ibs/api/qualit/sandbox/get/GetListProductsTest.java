@@ -13,21 +13,20 @@ import ru.ibs.api.qulit.sandbox.swagger.requests.QSRequests;
 import ru.ibs.api.qulit.sandbox.swagger.requests.Specifications;
 import ru.ibs.api.qulit.sandbox.utils.validator.JsonValidator;
 import ru.ibs.basetest.QSBaseTest;
-import ru.ibs.utils.properties.ConfProperties;
 
 import java.util.List;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ru.ibs.utils.properties.ConfProperties.getProperty;
 
 public class GetListProductsTest extends QSBaseTest {
 
     @Test
     public void getListProducts() throws JsonProcessingException {
-        RequestSpecification spec = Specifications.requestSpecification(ConfProperties.getProperty("base.url"), QSEndpoints.FOOD);
+        RequestSpecification spec = Specifications.requestSpecification(getProperty("base.url"), QSEndpoints.FOOD);
         Response response = QSRequests.get(spec);
-        response.statusCode();
         JsonMapper mapper = new JsonMapper();
         List<FoodModel> foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
         JsonValidator.validateObject(response);

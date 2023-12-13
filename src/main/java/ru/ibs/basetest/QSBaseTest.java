@@ -2,6 +2,7 @@ package ru.ibs.basetest;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import ru.ibs.api.qulit.sandbox.utils.enums.FoodType;
 import ru.ibs.utils.QSInitialization;
 import ru.ibs.utils.logger.Log;
 
@@ -27,5 +28,14 @@ public class QSBaseTest {
         QSInitialization.stopQSApplication();
         QSInitialization.stopQSThread();
         Log.info("Выход из метода AfterAll");
+    }
+
+    public static Object[][] productData() {
+        return new Object[][]{
+                {true, FoodType.FRUIT},
+                {false, FoodType.FRUIT},
+                {true, FoodType.VEGETABLE},
+                {false, FoodType.VEGETABLE},
+        };
     }
 }
