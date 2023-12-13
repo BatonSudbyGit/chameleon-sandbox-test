@@ -1,4 +1,4 @@
-package ru.ibs.api.qulit.sandbox.utils.validator;
+package ru.ibs.api.common.swagger.utils.validator;
 
 import io.restassured.response.Response;
 import org.everit.json.schema.Schema;

@@ -1,4 +1,4 @@
-package ru.ibs.api.qulit.sandbox.swagger.requests;
+package ru.ibs.api.common.swagger.requests;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -25,7 +25,7 @@ public class Specifications {
     }
 
     public static RequestSpecification requestSpecification(String url, String path, ContentType sentType,
-                                                             ContentType acceptType) {
+                                                            ContentType acceptType) {
         return new RequestSpecBuilder()
                 .setContentType(sentType)
                 .setAccept(acceptType)
@@ -62,7 +62,7 @@ public class Specifications {
         return RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
-                .get(getProperty("base.url") + QSEndpoints.FOOD)
+                .get(getProperty("qualit.url") + QSEndpoints.FOOD)
                 .then()
                 .log().all()
                 .extract()

@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import ru.ibs.api.common.swagger.requests.Requests;
+import ru.ibs.api.common.swagger.requests.Specifications;
 import ru.ibs.api.qulit.sandbox.models.food.FoodModel;
 import ru.ibs.api.qulit.sandbox.swagger.instances.endpoints.QSEndpoints;
-import ru.ibs.api.qulit.sandbox.swagger.requests.QSRequests;
-import ru.ibs.api.qulit.sandbox.swagger.requests.Specifications;
 import ru.ibs.api.qulit.sandbox.utils.enums.FoodType;
 import ru.ibs.api.qulit.sandbox.utils.food.Food;
 import ru.ibs.basetest.QSBaseTest;
@@ -20,13 +20,12 @@ import ru.ibs.basetest.QSBaseTest;
 import java.util.List;
 
 import static org.apache.http.HttpStatus.SC_OK;
-import static ru.ibs.api.qulit.sandbox.swagger.requests.Specifications.getSessionId;
+import static ru.ibs.api.common.swagger.requests.Specifications.getSessionId;
 import static ru.ibs.utils.properties.ConfProperties.getProperty;
 
 public class PostRemoveNewFoodTest extends QSBaseTest {
 
     private String sessionId;
-
 
     @BeforeEach
     public void beforeEach() {
@@ -42,13 +41,13 @@ public class PostRemoveNewFoodTest extends QSBaseTest {
 
 //        create product
         FoodModel foodModel = food.createFood(isExotic, foodType);
-        RequestSpecification spec = Specifications.requestSpecification(getProperty("base.url"),
-                QSEndpoints.FOOD, sessionId);
-        Response response = QSRequests.post(spec, foodModel);
+        RequestSpecification spec = Specifications.requestSpecification(
+                getProperty("qualit.url"), QSEndpoints.FOOD, sessionId);
+        Response response = Requests.post(spec, foodModel);
         Assertions.assertEquals(response.statusCode(), SC_OK, "Food creation failed");
 
 //        check that the product has been created
-        response = QSRequests.get(spec);
+        response = Requests.get(spec);
         try {
             foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
         } catch (JsonProcessingException e) {
@@ -59,11 +58,11 @@ public class PostRemoveNewFoodTest extends QSBaseTest {
         Assertions.assertEquals(response.statusCode(), SC_OK, "Food creation failed");
 
 //        remove product
-        RequestSpecification resetSpec = Specifications.requestSpecification(getProperty("base.url"),
+        RequestSpecification resetSpec = Specifications.requestSpecification(getProperty("qualit.url"),
                 QSEndpoints.RESET, sessionId);
-        response = QSRequests.post(resetSpec);
+        response = Requests.post(resetSpec);
         Assertions.assertEquals(response.statusCode(), SC_OK, "Food reset is failed");
-        response = QSRequests.get(spec);
+        response = Requests.get(spec);
         try {
             foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
         } catch (JsonProcessingException e) {

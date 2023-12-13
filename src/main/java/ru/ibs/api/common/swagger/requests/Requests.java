@@ -1,11 +1,11 @@
-package ru.ibs.api.qulit.sandbox.swagger.requests;
+package ru.ibs.api.common.swagger.requests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import ru.ibs.api.qulit.sandbox.models.food.FoodModel;
 
-public class QSRequests {
+public class Requests {
 
     public static Response get(RequestSpecification spec) {
         return RestAssured.given()
@@ -17,10 +17,10 @@ public class QSRequests {
                 .extract().response();
     }
 
-    public static Response post(RequestSpecification spec, FoodModel foodModel) {
+    public static Response post(RequestSpecification spec, Object model) {
         return RestAssured.given()
                 .spec(spec)
-                .body(foodModel)
+                .body(model)
                 .when()
                 .post()
                 .then()
@@ -37,6 +37,5 @@ public class QSRequests {
                 .log().all()
                 .extract().response();
     }
-
 
 }

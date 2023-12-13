@@ -7,11 +7,12 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.ibs.api.common.swagger.requests.Requests;
+import ru.ibs.api.common.swagger.requests.Specifications;
 import ru.ibs.api.qulit.sandbox.models.food.FoodModel;
 import ru.ibs.api.qulit.sandbox.swagger.instances.endpoints.QSEndpoints;
-import ru.ibs.api.qulit.sandbox.swagger.requests.QSRequests;
-import ru.ibs.api.qulit.sandbox.swagger.requests.Specifications;
-import ru.ibs.api.qulit.sandbox.utils.validator.JsonValidator;
+
+import ru.ibs.api.common.swagger.utils.validator.JsonValidator;
 import ru.ibs.basetest.QSBaseTest;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class GetListProductsTest extends QSBaseTest {
 
     @Test
     public void getListProducts() throws JsonProcessingException {
-        RequestSpecification spec = Specifications.requestSpecification(getProperty("base.url"), QSEndpoints.FOOD);
-        Response response = QSRequests.get(spec);
+        RequestSpecification spec = Specifications.requestSpecification(getProperty("qualit.url"), QSEndpoints.FOOD);
+        Response response = Requests.get(spec);
         JsonMapper mapper = new JsonMapper();
         List<FoodModel> foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
         JsonValidator.validateObject(response);
