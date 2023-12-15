@@ -33,7 +33,7 @@ public class PostNewFoodTest extends QSBaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("productData")
+    @MethodSource("ru.ibs.api.qulit.sandbox.utils.food.ProductData#productData")
     public void postNewFood(boolean isExotic, FoodType foodType) {
         Food food = new Food();
         List<FoodModel> foodModelList;

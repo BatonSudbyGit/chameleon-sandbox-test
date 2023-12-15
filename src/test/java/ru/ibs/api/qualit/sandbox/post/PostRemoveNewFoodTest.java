@@ -33,7 +33,7 @@ public class PostRemoveNewFoodTest extends QSBaseTest {
     }
 
     @ParameterizedTest
-    @MethodSource("productData")
+    @MethodSource("ru.ibs.api.qulit.sandbox.utils.food.ProductData#productData")
     public void removeNewFood(boolean isExotic, FoodType foodType) {
         Food food = new Food();
         JsonMapper mapper = new JsonMapper();

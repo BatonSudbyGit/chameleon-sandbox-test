@@ -30,12 +30,5 @@ public class QSBaseTest {
         Log.info("Выход из метода AfterAll");
     }
 
-    public static Object[][] productData() {
-        return new Object[][]{
-                {true, FoodType.FRUIT},
-                {false, FoodType.FRUIT},
-                {true, FoodType.VEGETABLE},
-                {false, FoodType.VEGETABLE},
-        };
-    }
+
 }

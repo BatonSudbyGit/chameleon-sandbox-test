@@ -3,7 +3,6 @@ package ru.ibs.api.common.swagger.requests;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import ru.ibs.api.qulit.sandbox.models.food.FoodModel;
 
 public class Requests {
 
@@ -38,4 +37,24 @@ public class Requests {
                 .extract().response();
     }
 
+    public static Response put(RequestSpecification spec, Object model) {
+        return RestAssured.given()
+                .spec(spec)
+                .body(model)
+                .when()
+                .put()
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
+    public static Response delete(RequestSpecification spec) {
+        return RestAssured.given()
+                .spec(spec)
+                .when()
+                .delete()
+                .then()
+                .log().all()
+                .extract().response();
+    }
 }
