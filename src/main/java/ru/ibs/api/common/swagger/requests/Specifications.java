@@ -53,7 +53,6 @@ public class Specifications {
                 .setAccept(ContentType.JSON)
                 .setBaseUri(url)
                 .setBasePath(path)
-                .setSessionId(getSessionId())
                 .build()
                 .log().all();
     }

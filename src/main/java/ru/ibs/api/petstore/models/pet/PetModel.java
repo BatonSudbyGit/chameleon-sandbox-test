@@ -13,7 +13,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PetModel {
     @JsonProperty("id")
-    private Integer id;
+    private Long id;
     @JsonProperty("category")
     private Category category;
     @JsonProperty("name")
@@ -28,7 +28,7 @@ public class PetModel {
     public PetModel() {
     }
 
-    public PetModel(Integer id, Category category, String name, List<String> photoUrls, List<Tag> tags, String status) {
+    public PetModel(Long id, Category category, String name, List<String> photoUrls, List<Tag> tags, String status) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -37,11 +37,11 @@ public class PetModel {
         this.status = status;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
