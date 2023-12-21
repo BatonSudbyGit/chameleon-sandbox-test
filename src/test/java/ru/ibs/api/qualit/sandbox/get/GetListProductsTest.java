@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.ibs.api.common.swagger.requests.Requests;
 import ru.ibs.api.common.swagger.requests.Specifications;
+import ru.ibs.api.common.swagger.utils.paths.ModelType;
 import ru.ibs.api.qulit.sandbox.models.food.FoodModel;
 import ru.ibs.api.qulit.sandbox.swagger.instances.endpoints.QSEndpoints;
 
@@ -30,7 +31,7 @@ public class GetListProductsTest extends QSBaseTest {
         Response response = Requests.get(spec);
         JsonMapper mapper = new JsonMapper();
         List<FoodModel> foodModelList = mapper.readValue(response.asString(), new TypeReference<>() {});
-        JsonValidator.validateObject(response);
+        JsonValidator.validateObject(response, ModelType.FOOD_TEMPLATE_PATH.getModelType());
         Assertions.assertAll(
                 () -> assertEquals(SC_OK, response.statusCode(), "Status code is incorrect"),
                 () -> assertTrue(foodModelList.size() > 0, "the response body is missing"));
